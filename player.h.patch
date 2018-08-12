@@ -1,0 +1,40 @@
+--- vs1000b-lib/player.h.orig	2011-12-08 17:56:35.000000000 +0800
++++ vs1000b-lib/player.h	2014-06-25 13:17:41.616763030 +0800
+@@ -37,10 +37,10 @@
+   ke_forward,    /**< skip 5 seconds forward */
+   ke_volumeUp,   /**< increase volume by 0.5dB */
+   ke_volumeDown, /**< decrease volume by 0.5dB */
+-  ke_earSpeaker, /**< rotate earSpeaker setting: 0, 16000U, 38000U, 54000U */
+-  ke_earSpeakerToggle, /**< toggle earSpeaker setting: 0, 38000U */
+-  ke_randomToggle, /**< toggle random play mode */
+-  ke_randomToggleNewSong, /**< toggle random play mode, start new song immediately when activated */
++  ke_OT_NT,      /**< skip testaments */
++  ke_earSpeakerToggle,/**< Toggle EarSpeaker processing (2 settings) */
++  ke_bookNext,   /**< skip to next book */
++  ke_bookPrev,    /**< skip to previous book */
+   ke_pauseToggle, /**< toggle pause mode */
+   ke_powerOff,    /**< power off the unit */
+   ke_ff_faster,  /**< increase play speed (needs ke_ff_off as release event) */
+@@ -48,6 +48,12 @@
+   ke_ff_off,     /**< back to normal play speed */
+   ke_volumeUp2,  /**< increase volume by 1.0dB */
+   ke_volumeDown2,/**< decrease volume by 1.0dB */
++  ke_bookmark,   /**< bookmark */
++  ke_markPrev,   /**< jump to previous bookmark */
++  ke_markNext,   /**< jump to next bookmark */
++  ke_repeat,     /**< repeat chapter */
++  ke_resetBookmarks,/**< reset all bookmarks to beginning of Genesis */
++  ke_back,     /**< jump to place before previous jump */
+ };
+ 
+ struct KeyMapping {
+@@ -64,7 +70,8 @@
+ #define KEY_2 2 /* random/earspeaker -> vol up 1   / vol up */
+ #define KEY_3 4 /* next/vol up       -> prev / rew */
+ #define KEY_4 8 /*                   -> next / ff */
+-#define KEY_5 16 /*                  -> earspeaker / random */
++#define KEY_5 16 /*                  -> OT_NT */
++// KEY_6, KEY_7 and KEY_8 are defined in dev1000.h
+ #define KEY_POWER 256 /* pause / power off/on */
+ #define KEY_RELEASED   0x4000
+ #define KEY_LONG_PRESS 0x8000
