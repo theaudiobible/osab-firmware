@@ -19,6 +19,7 @@ The firmware is for the VS1000 processor from VLSI - vlsi.fi
 Building needs to be done on a Linux machine at this stage.  If you really really _have_ to use Windows, please contact me via the contact form at audiobibleplayer.org or theaudiobible.org
 
 Other dependencies include:
+* glibc.i686
 * GNU make
 * gcc
 * curl
