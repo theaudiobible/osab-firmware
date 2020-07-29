@@ -1,7 +1,7 @@
 /*
  * osab.c - Firmware for the Open Source Audio Bible player.
  * 
- * Copyright (C) 2011-2017 Theophilus (http://audiobibleplayer.org)
+ * Copyright (C) 2011-2020 Theophilus (http://theaudiobible.org)
  *
  * Parts of this code are derived from VLSI's audio book and MMC sample code - http://vlsi.fi
  *

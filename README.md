@@ -1,10 +1,10 @@
-# OSAB - the Open Source Audio Bible player
-## [audiobibleplayer.org](http://audiobibleplayer.org/)
-#### Copyright (C) 2011-2017 Theophilus
+## OSAB - the Open Source Audio Bible player
+## [theaudiobible.org](http://theaudiobible.org/)
+#### Copyright (C) 2011-2020 Theophilus
 
 OSAB is a design for a portable audio Bible player released under the MIT Licence in the hope that it will be used by others worldwide to produce and distribute portable audio players that are specifically designed to share God's word with those who need to hear.
 
-The intention is to share firmware, software, schematics, PCB layout and enclosure design along with instructions on how to put it all together.  The intention is to design a PCB that can be hand-made and assembled by hand, but that could also be produced and assembled via normal mass production methods.  Likewise the intention with the enclosure is that it be 3D-printable on a low cost FDM 3D printer, or mass produced via classic injection moulding techniques.
+The intention is to share firmware, software, schematics, PCB layout and enclosure design along with instructions on how to put it all together.  The intention with the enclosure is that it be 3D-printable on a low cost FDM 3D printer, or mass-producible via injection moulding.
 
 ## osab-firmware
 This is the repository for the firmware source files for OSAB.
@@ -16,7 +16,7 @@ This is open source software/firmware released under the MIT Licence - please se
 The firmware is for the VS1000 processor from VLSI - vlsi.fi
 
 ### Dependencies
-Building needs to be done on a Linux machine at this stage.  If you really really _have_ to use Windows, please contact me via the contact form at audiobibleplayer.org or theaudiobible.org
+Building needs to be done on a Linux machine at this stage.
 
 Other dependencies include:
 * glibc.i686
@@ -35,7 +35,7 @@ make
 
 The appropriate tools and library should then be downloaded from vlsi.fi and the build process should run, producing eeprom.img.
 
-A happy ending should look something like this:
+A successful result should end something like this:
 ```shell
 tools/vskit130/bin/coff2spiboot -x 0x50 osab.bin eeprom.img
 I: 0x0050-0x0729 In: 7017, out: 7017
@@ -49,7 +49,7 @@ In: 7221, out: 7226
 ### Hardware dependencies
 * This firmware is designed to work on an **OSAB board** - see the **osab-electronics** project for the schematic and PCB (printed circuit board) design.  Note that the OSAB PCB design is still a work in progress.
 
-* Until the OSAB board design is complete, firmware testing will have to be done on an existing VS1000 board such as the VS1000 developer board from vlsi.fi or on an [m7 audio Bible player](http://theaudiobible.org/m7.php).  The advantage of using the m7 is that the firmware will work "out of the box" on this hardware, whereas any other VS1000 board would need hardware modification.
+* Until the OSAB board design is complete, firmware testing will have to be done on an existing VS1000 board such as the VS1000 developer board from vlsi.fi or on an [m7 audio Bible player](https://theaudiobible.org/).  The advantage of using the m7 is that the firmware will work "out of the box" on this hardware, whereas any other VS1000 board would need hardware modification.
 
 * A 3.3V TTL USB-serial cable is needed to upload the firmware to the OSAB board.
 
@@ -76,7 +76,7 @@ dmesg | tail
 [161708.684057] usb 2-1.4: pl2303 converter now attached to ttyUSB0
 ```
 
-* Symlink the device file to `/dev/ttyS0`.  The vs3emu software from VLSI expects the serial port to be on `/dev/ttyS0` or `/dev/ttyS1`, but Linux creates a device file `/dev/ttyUSB0` (or similar) for USB serial devices.  So, the easiest solution is to remove the existing `/dev/ttyS0` file (assuming it is not needed) and make a symbolic link from `/dev/ttyUSB0` to `/dev/ttyS0`.  This could be done manually each time the machine is booted, or automated in something like `/etc/rc.local`:
+* Symlink the device file to `/dev/ttyS0`.  The vs3emu software from VLSI expects the serial port to be on `/dev/ttyS0` or `/dev/ttyS1`, but Linux creates a device file `/dev/ttyUSB0` (or similar) for USB serial devices.  So, the easiest solution is to remove the existing `/dev/ttyS0` file (assuming it is not needed) and make a symbolic link from `/dev/ttyUSB0` to `/dev/ttyS0`.
 ```shell
 sudo rm /dev/ttyS0
 sudo ln -s /dev/ttyUSB0 /dev/ttyS0
@@ -85,9 +85,11 @@ sudo ln -s /dev/ttyUSB0 /dev/ttyS0
 ### Uploading the firmware
 1. Connect the USB-serial cable to the Linux machine and to the OASB USB port.
 
-2. Hold the CS pin on the EEPROM chip (or similar) low before powering up the VS1000. On the OSAB or m7 board this can be done by pinching the outsides of pins 1 and 4 on the 25LC640A with a pair of metal tweezers (discharge any static electricity from your body before doing this).  Keep the tweezers lightly pinched on pins 1 and 4 while pressing the Play button to power up the VS1000.  If there is existing firmware in the EEPROM and you hear audio playing, then you know that the CS pin was not held low properly as the VS1000 booted.  At this point, while the VS1000 is powered up, just pinch pins 1 and 4 with the metal tweezers again and press the reset button to force a reboot of the VS1000.
+2. Hold the CS pin on the EEPROM chip low before powering up the VS1000. On the OSAB or m7 board this can be done by pinching the outsides of pins 1 and 4 on the 25LC640A with a pair of metal tweezers (discharge any static electricity from your body before doing this).
 
-3. To upload the firmware image file (eeprom.img), run `make upload` and you should see something like the following:
+3. While holding the CS pin on the EEPROM chip low, press the reset button, then press the Play button to power up the VS1000.  If there is existing firmware in the EEPROM and you hear audio playing, then you know that the CS pin was not held low properly as the VS1000 booted.  At this point, while the VS1000 is powered up, hold the CS pin low again and press the reset button to force a reboot of the VS1000.
+
+4. To upload the firmware image file (eeprom.img), run `make upload` and you should see something like the following:
 ```shell
 make upload
 vs3emu -chip vs1000 -s 115200 -l prommer.bin e.cmd
@@ -138,7 +140,7 @@ Reading first 2 words of EEPROM: 564C5349 ("VLSI"), which is a valid VLSI boot i
 Done.
 ```
 
-4. At this point you can press ctrl-C to quit vs3emu and then press the reset button on the OSAB board.  Assuming there is a microSD card with .ogg files and a menu.mnu file (refer to the `README.md` in the **osab-tools** project for the process of uploading audio content to a microSD card) then you should hear the audio playing.  If there is no microSD card present, then the blue status LED should flash.
+5. At this point you can press ctrl-C to quit vs3emu and then press the reset button on the OSAB board.  Assuming there is a microSD card with .ogg files and a menu.mnu file (refer to the `README.md` in the **osab-tools** project for the process of uploading audio content to a microSD card) then you should hear the audio playing.  If there is no microSD card present, then the blue status LED should flash.
 
 ## Cleaning up
 To clean up object files and build targets, just run:
