@@ -1,6 +1,6 @@
 ## OSAB - the Open Source Audio Bible player
 ## [theaudiobible.org](http://theaudiobible.org/)
-#### Copyright (C) 2011-2020 Theophilus
+#### Copyright (C) 2011-2022 Theophilus
 
 OSAB is a design for a portable audio Bible player released under the MIT Licence in the hope that it will be used by others worldwide to produce and distribute portable audio players that are specifically designed to share God's word with those who need to hear.
 
@@ -83,9 +83,9 @@ sudo ln -s /dev/ttyUSB0 /dev/ttyS0
 ```
 
 ### Uploading the firmware
-1. Connect the USB-serial cable to the Linux machine and to the OASB USB port.
+1. Connect the USB-serial cable to the Linux machine and to the OSAB USB port.
 
-2. Hold the CS pin on the EEPROM chip low before powering up the VS1000. On the OSAB or m7 board this can be done by pinching the outsides of pins 1 and 4 on the 25LC640A with a pair of metal tweezers (discharge any static electricity from your body before doing this).
+2. Hold the CS pin on the EEPROM chip low before powering up the VS1000. On the OSAB or m7 board this can be done by pinching the outsides of pins 1 and 4 on the EEPROM (U3) with a pair of metal tweezers (discharge any static electricity from your body before doing this).
 
 3. While holding the CS pin on the EEPROM chip low, press the reset button, then press the Play button to power up the VS1000.  If there is existing firmware in the EEPROM and you hear audio playing, then you know that the CS pin was not held low properly as the VS1000 booted.  At this point, while the VS1000 is powered up, hold the CS pin low again and press the reset button to force a reboot of the VS1000.
 
