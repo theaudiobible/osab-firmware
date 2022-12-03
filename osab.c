@@ -728,8 +728,8 @@ auto void MyPowerOff(void) {
     SpiWrite(CONFIG + BOOKMARK, bookmark);  /* save current bookmark */
     PERIP(INT_ENABLEL) &= ~INTF_TIM1;   /*Disable interrupt TIM1*/
     i = PERIP(GPIO0_ODATA);
-    i &= ~AMP; /* amp off */
-    i |= BAT_LED; /*LED off */
+    i &= ~AMP;     // amp off
+    i &= ~BAT_LED; //LED off
     PERIP(GPIO0_ODATA) = i;
     for (i = 50; i > 0; i--) BusyWait10();
     RealPowerOff();
@@ -749,7 +749,7 @@ void InterruptHandler_Timer1(void) {
             PERIP(GPIO0_ODATA) ^= BAT_LED;
         }
     } else {
-        PERIP(GPIO0_ODATA) &= ~BAT_LED; /* switch it on */
+        PERIP(GPIO0_ODATA) |= BAT_LED; // switch it on
         i = BATTERYLOWTIME;
 #if DEBUG_LEVEL > 1
         puts("=GOOD");
@@ -764,7 +764,8 @@ void Initialize(void) {
     /* Configure GPIO for Amp Shutdown, Battery Status LED*/
     PERIP(GPIO0_MODE) &= ~(AMP | BAT_LED);
     PERIP(GPIO0_DDR) |= AMP | BAT_LED;
-    PERIP(GPIO0_ODATA) &= ~(AMP | BAT_LED); /* amp off, LED on */
+    PERIP(GPIO0_ODATA) &= ~AMP;      // amp off
+    PERIP(GPIO0_ODATA) |= BAT_LED;   // LED on
 
 #ifndef USE_DEBUG
     /* Make UART pins output low to make invisible on USB bus */
