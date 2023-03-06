@@ -1,5 +1,5 @@
 e.cmd
-eeprom.img
+eeprom.img*
 hw_desc
 mem_desc
 mem_desc.available
